@@ -1,0 +1,18 @@
+.navbar-brand{
+    color:#EAEBD0;
+    font-weight: 700;
+    font-size: x-large;
+    font-style:oblique; 
+}
+
+.navbar{
+    background-color: #DA6C6C;
+}
+
+.navbar .nav-link{
+    color:#EAEBD0;
+}
+.navbar .nav-link,
+.navbar .nav-link.active {
+    color: #EAEBD0;
+}
