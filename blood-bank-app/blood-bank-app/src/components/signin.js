@@ -13,6 +13,11 @@ const SignIn = () => {
 
     const username = e.target.username.value.trim();
     const password = e.target.password.value;
+    const apiBase =
+      process.env.REACT_APP_API_URL ||
+      (typeof window !== "undefined" && window.location.hostname === "localhost"
+        ? "http://localhost:5000"
+        : null);
 
     // Basic client-side validation
     if (!username || !password) {
@@ -20,11 +25,16 @@ const SignIn = () => {
       setIsLoading(false);
       return;
     }
+    if (!apiBase) {
+      setErrorMessage("Backend URL is not configured for production.");
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 8000);
-      const response = await fetch("http://localhost:5000/signin", {
+      const response = await fetch(`${apiBase}/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
